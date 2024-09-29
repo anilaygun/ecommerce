@@ -9,13 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UpdateProductDto {
+public class UpdateProductDto implements Serializable {
     private int id;
     @NotNull
     @NotBlank
