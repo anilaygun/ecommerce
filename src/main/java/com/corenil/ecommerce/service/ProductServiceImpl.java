@@ -6,6 +6,7 @@ import com.corenil.ecommerce.dto.product.UpdateProductDto;
 import com.corenil.ecommerce.entity.Product;
 import com.corenil.ecommerce.mapper.ProductMapper;
 import com.corenil.ecommerce.repository.ProductRepository;
+import com.corenil.ecommerce.rules.ProductBusinessRules;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ProductBusinessRules productBusinessRules;
 
     @Override
     public ProductResponseDto getById(int id) {
@@ -36,6 +38,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto add(CreateProductDto createProductDto) {
+        productBusinessRules.productWithSameNameShouldNotExist(createProductDto.getName());
+
         Product product = ProductMapper.INSTANCE.productFromCreateDto(createProductDto);
         productRepository.save(product);
 
