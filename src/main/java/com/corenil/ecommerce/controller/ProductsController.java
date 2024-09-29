@@ -29,7 +29,7 @@ public class ProductsController {
         return ResponseEntity.ok(productService.getByName(name));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id{id}")
     public ResponseEntity<ProductResponseDto> getById(@PathVariable @Valid int id) {
         ProductResponseDto responseDto = productService.getById(id);
 
